@@ -1,0 +1,232 @@
+/* ========================================
+   CSS RESET & BASE STYLES
+   ======================================== */
+
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-bg-primary: #080863;
+    --color-bg-secondary: #34348e;
+    --color-neon-cyan: #e2e8ff;
+    --color-neon-blue: #6B8CFF;
+    --color-neon-pink: #ffffff;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #A0A0B0;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 48px;
+    --spacing-xl: 80px;
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.4s ease;
+    --transition-slow: 0.6s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ========================================
+   PARTICLE CANVAS
+   ======================================== */
+
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-neon-cyan);
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--color-neon-cyan);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neon-blue);
+    box-shadow: 0 0 20px var(--color-neon-blue);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neon-cyan) var(--color-bg-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::-webkit-scrollbar-thumb {
+        box-shadow: none;
+    }
+}
+
+/* ========================================
+   ANIMATIONS & UTILITIES
+   ======================================== */
+
+[data-aos] {
+    opacity: 0;
+    transition: var(--transition-slow);
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+[data-aos="fade-up"].aos-animate {
+    transform: translateY(0);
+}
+
+[data-aos="fade-up"] {
+    transform: translateY(30px);
+}
+
+[data-aos="fade-right"].aos-animate {
+    transform: translateX(0);
+}
+
+[data-aos="fade-right"] {
+    transform: translateX(-30px);
+}
+
+[data-aos="fade-left"].aos-animate {
+    transform: translateX(0);
+}
+
+[data-aos="fade-left"] {
+    transform: translateX(30px);
+}
+
+[data-aos="zoom-in"].aos-animate {
+    transform: scale(1);
+}
+
+[data-aos="zoom-in"] {
+    transform: scale(0.9);
+}
+
+/* ========================================
+   KEYFRAME ANIMATIONS
+   ======================================== */
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes gridMove {
+    0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+    100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-30px) rotate(90deg); }
+    50% { transform: translateY(0) rotate(180deg); }
+    75% { transform: translateY(30px) rotate(270deg); }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 30px var(--color-neon-cyan));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 50px var(--color-neon-cyan));
+        transform: scale(1.05);
+    }
+}
+
+@keyframes glitch {
+    0%, 90%, 100% {
+        transform: translate(0);
+    }
+    92% {
+        transform: translate(-3px, 3px);
+        text-shadow: 
+            3px -3px 0 var(--color-neon-pink),
+            -3px 3px 0 var(--color-neon-blue);
+    }
+    94% {
+        transform: translate(3px, -3px);
+        text-shadow: 
+            -3px 3px 0 var(--color-neon-pink),
+            3px -3px 0 var(--color-neon-blue);
+    }
+    96% {
+        transform: translate(-3px, -3px);
+    }
+    98% {
+        transform: translate(3px, 3px);
+    }
+}
+
+@keyframes numberGlow {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px var(--color-neon-blue),
+            0 0 20px var(--color-neon-blue);
+    }
+    50% {
+        text-shadow: 
+            0 0 20px var(--color-neon-blue),
+            0 0 40px var(--color-neon-blue),
+            0 0 60px var(--color-neon-blue);
+    }
+}
+
+@keyframes subtitlePulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+@keyframes scrollDown {
+    0% {
+        top: 10px;
+        opacity: 1;
+    }
+    100% {
+        top: 30px;
+        opacity: 0;
+    }
+}

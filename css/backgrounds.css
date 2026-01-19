@@ -1,0 +1,244 @@
+/* ========================================
+   ANIMATED BACKGROUNDS
+   ======================================== */
+
+   .pattern-overlay {
+    width: 100%;
+    height: 100%;
+    background: url('../background.png') center/cover;
+    opacity: 0.05;
+    filter: blur(2px);
+}
+
+.animated-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-neon-cyan), transparent);
+    animation: lineMove 8s linear infinite;
+}
+
+.line-1 {
+    top: 20%;
+    width: 100%;
+    animation-delay: 0s;
+}
+
+.line-2 {
+    top: 40%;
+    width: 100%;
+    animation-delay: 2s;
+    background: linear-gradient(90deg, transparent, var(--color-neon-pink), transparent);
+}
+
+.line-3 {
+    top: 60%;
+    width: 100%;
+    animation-delay: 4s;
+    background: linear-gradient(90deg, transparent, var(--color-neon-blue), transparent);
+}
+
+.line-4 {
+    top: 80%;
+    width: 100%;
+    animation-delay: 6s;
+}
+
+@keyframes lineMove {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.circuit-pattern {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+    animation: circuitPulse 4s ease-in-out infinite;
+}
+
+@keyframes circuitPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.data-stream {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.stream {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(180deg, transparent, var(--color-neon-cyan), transparent);
+    animation: streamFall 3s linear infinite;
+}
+
+.stream-1 {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.stream-2 {
+    left: 50%;
+    animation-delay: 1s;
+    background: linear-gradient(180deg, transparent, var(--color-neon-pink), transparent);
+}
+
+.stream-3 {
+    left: 80%;
+    animation-delay: 2s;
+    background: linear-gradient(180deg, transparent, var(--color-neon-blue), transparent);
+}
+
+@keyframes streamFall {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.hex-pattern {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(0deg, rgba(107, 140, 255, 0.05) 0px, transparent 2px, transparent 40px),
+        repeating-linear-gradient(60deg, rgba(107, 140, 255, 0.05) 0px, transparent 2px, transparent 40px),
+        repeating-linear-gradient(120deg, rgba(107, 140, 255, 0.05) 0px, transparent 2px, transparent 40px);
+    animation: hexRotate 20s linear infinite;
+}
+
+@keyframes hexRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.grid-overlay {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: gridShift 10s linear infinite;
+}
+
+@keyframes gridShift {
+    0% { background-position: 0 0; }
+    100% { background-position: 30px 30px; }
+}
+
+.energy-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.field-line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: var(--color-neon-cyan);
+    box-shadow: 0 0 10px var(--color-neon-cyan);
+    animation: fieldWave 6s ease-in-out infinite;
+}
+
+.field-1 {
+    top: 30%;
+    animation-delay: 0s;
+}
+
+.field-2 {
+    top: 50%;
+    animation-delay: 2s;
+    background: var(--color-neon-pink);
+    box-shadow: 0 0 10px var(--color-neon-pink);
+}
+
+.field-3 {
+    top: 70%;
+    animation-delay: 4s;
+    background: var(--color-neon-blue);
+    box-shadow: 0 0 10px var(--color-neon-blue);
+}
+
+@keyframes fieldWave {
+    0%, 100% {
+        transform: scaleX(1) translateY(0);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scaleX(1.5) translateY(-10px);
+        opacity: 0.6;
+    }
+}
+
+.energy-waves {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.wave {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 2px solid var(--color-neon-cyan);
+    opacity: 0;
+    animation: waveExpand 6s ease-out infinite;
+}
+
+.wave-1 {
+    animation-delay: 0s;
+}
+
+.wave-2 {
+    animation-delay: 2s;
+    border-color: var(--color-neon-pink);
+}
+
+.wave-3 {
+    animation-delay: 4s;
+    border-color: var(--color-neon-blue);
+}
+
+@keyframes waveExpand {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+    }
+    100% {
+        width: 200%;
+        height: 200%;
+        opacity: 0;
+    }
+}

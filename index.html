@@ -4,12 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./assets/logo.png" type="image/png">
+    <link rel="icon" href="./logo.png" type="image/png">
     <title>Paratech 9302 - FRC Team</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/navigation.css">
+    <link rel="stylesheet" href="./css/hero.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/sections.css">
+    <link rel="stylesheet" href="./css/backgrounds.css">
 </head>
 
 <body>
@@ -41,7 +46,6 @@
     <section id="home" class="hero">
         <div class="hero-background">
             <div class="neon-grid"></div>
-            <div class="scan-line"></div>
             <div class="floating-shapes">
                 <div class="shape shape-1"></div>
                 <div class="shape shape-2"></div>
@@ -50,20 +54,10 @@
                 <div class="shape shape-5"></div>
                 <div class="shape shape-6"></div>
             </div>
-            <div class="energy-waves">
-                <div class="wave wave-1"></div>
-                <div class="wave wave-2"></div>
-                <div class="wave wave-3"></div>
-            </div>
         </div>
         <div class="hero-content">
             <div class="hero-logo">
                 <img src="./logo.png" alt="Paratech 9302">
-                <div class="logo-rings">
-                    <div class="ring ring-1"></div>
-                    <div class="ring ring-2"></div>
-                    <div class="ring ring-3"></div>
-                </div>
             </div>
             <p class="hero-subtitle">FIRST ROBOTICS COMPETITION</p>
             <p class="hero-description">Construindo o futuro através de inovação e robótica de ponta</p>
@@ -78,9 +72,7 @@
                 </a>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
+    
     </section>
 
     <!-- About Section -->
@@ -104,11 +96,12 @@
                 <div class="about-text" data-aos="fade-right">
                     <p class="lead">Somos a Paratech 9302, uma equipe apaixonada da FIRST Robotics Competition dedicada a ultrapassar os limites da inovação e excelência em engenharia.</p>
                     <p>Nossa equipe combina tecnologia de ponta com resolução criativa de problemas para projetar, construir e programar robôs competitivos. Acreditamos no poder da educação STEM e inspiramos jovens mentes a seguir carreiras em ciência, tecnologia, engenharia e matemática.</p>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <button class="scout"></button>
-                            <div class="stat-number" >Scouting Site</div>
-                        </div>
+                    
+                    <!-- Scout Button -->
+                    <div class="scout-button-wrapper">
+                        <a href="./scout.html" class="scout">
+                            Scouting Site
+                        </a>
                     </div>
                 </div>
             </div>
@@ -186,11 +179,6 @@
     <section id="team" class="section team">
         <div class="section-background">
             <div class="hex-pattern"></div>
-            <div class="pulse-circles">
-                <div class="pulse-circle pulse-1"></div>
-                <div class="pulse-circle pulse-2"></div>
-                <div class="pulse-circle pulse-3"></div>
-            </div>
         </div>
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">
@@ -258,7 +246,7 @@
                             <div class="info-icon">EMAIL</div>
                         </div>
                         <h3>Email</h3>
-                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b4844455f4a5f446b5b4a594a5f4e484312181b1905484446">[email&#160;protected]</a></p>
+                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98fbf7f6ecf9ecf7d8e8f9eaf9ecfdfbf0a1aba8aab6fbf7f5">[email&#160;protected]</a></p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon-wrapper">
@@ -305,7 +293,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="./assets/logo.png" alt="Paratech 9302">
+                    <img src="./logo.png" alt="Paratech 9302">
                     <p>Construindo o futuro através da robótica</p>
                 </div>
                 <div class="footer-links">
