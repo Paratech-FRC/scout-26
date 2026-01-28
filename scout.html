@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./logo.png" type="image/png">
-    <title>Scouting - Paratech 9302</title>
+    <link rel="icon" href="./logo-total.png" type="image/png">
+    <title>Scouting System - Paratech 9302</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/sections.css">
     <link rel="stylesheet" href="./css/backgrounds.css">
+    <link rel="stylesheet" href="./css/scout.css">
 </head>
 
 <body>
@@ -25,14 +26,14 @@
     <nav class="nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="./logo.png" alt="Paratech 9302 Logo">
+                <a href="./index.html">
+                    <img src="./logo.png" alt="Paratech 9302 Logo">
+                </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">Sobre</a></li>
-                <li><a href="#robot" class="nav-link">Robô</a></li>
-                <li><a href="#team" class="nav-link">Equipe</a></li>
-                <li><a href="#contact" class="nav-link">Contato</a></li>
+                <li><a href="./index.html" class="nav-link">Home</a></li>
+                <li><a href="#reports" class="nav-link">Relatórios</a></li>
+                <li><a href="#new-scout" class="nav-link">Novo Scout</a></li>
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -43,29 +44,536 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero hero-small">
         <div class="hero-background">
             <div class="neon-grid"></div>
             <div class="floating-shapes">
                 <div class="shape shape-1"></div>
                 <div class="shape shape-2"></div>
                 <div class="shape shape-3"></div>
-                <div class="shape shape-4"></div>
-                <div class="shape shape-5"></div>
-                <div class="shape shape-6"></div>
             </div>
         </div>
         <div class="hero-content">
-            <div class="hero-logo">
-                <img src="./logo.png" alt="Paratech 9302">
+        
+            <h1 class="hero-title-small">SCOUTING SYSTEM</h1>
+            <p class="hero-subtitle">REBUILT ANALYSIS PLATFORM</p>
+            <div style="margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <div style="width: 10px; height: 10px; border-radius: 50%; background: #00ff00; box-shadow: 0 0 10px #00ff00;" id="firebaseStatus"></div>
+                <span style="font-size: 14px; color: var(--color-text-secondary);" id="firebaseStatusText">Conectando ao Firebase...</span>
             </div>
-            <p class="hero-subtitle">REBUILT SCOUTING SYSTEM</p>
-            <p class="hero-description"></p>
         </div>
     </section>
 
+    <!-- Reports Section -->
+    <section id="reports" class="section reports-section">
+        <div class="section-background">
+            <div class="circuit-pattern"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-line"></span>
+                RELATÓRIOS DISPONÍVEIS
+                <span class="title-line"></span>
+            </h2>
+            
+            <div class="search-bar">
+                <input type="text" id="searchTeam" placeholder="Buscar equipe por número ou nome..." class="search-input">
+                <button class="btn btn-primary" onclick="searchTeam()">
+                    <span>🔍 BUSCAR</span>
+                </button>
+            </div>
+
+            <div id="teamsList" class="teams-grid">
+                <div class="empty-state">
+                    <div class="empty-state-icon">⏳</div>
+                    <div class="empty-state-text">Carregando relatórios do Firebase...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Scout Form Section -->
+    <section id="new-scout" class="section scout-form-section">
+        <div class="section-background">
+            <div class="hex-pattern"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-line"></span>
+                NOVO RELATÓRIO
+                <span class="title-line"></span>
+            </h2>
+
+            <form id="scoutForm" class="scout-form">
+                <!-- Team Information -->
+                <div class="form-section">
+                    <h3 class="form-section-title">📋 INFORMAÇÕES DA EQUIPE</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nome da Equipe</label>
+                            <input type="text" id="teamName" required placeholder="Ex: Paratech">
+                        </div>
+                        <div class="form-group">
+                            <label>Número da Equipe</label>
+                            <input type="number" id="teamNumber" required placeholder="Ex: 9302">
+                        </div>
+                        <div class="form-group">
+                            <label>Número da Partida</label>
+                            <input type="text" id="matchNumber" required placeholder="Ex: Q15 ou SF1">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Partida</label>
+                            <select id="matchType" required>
+                                <option value="qualifier">Qualifier</option>
+                                <option value="playoff">Playoff</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nome do Scouter</label>
+                            <input type="text" id="scouterName" required placeholder="Seu nome">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autonomous Section -->
+                <div class="form-section">
+                    <h3 class="form-section-title">🤖 AUTÔNOMO</h3>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="autoFunctional" data-points="5">
+                            <span>Tem autônomo funcional? (+5)</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="autoLeaveZone" data-points="5">
+                            <span>Sai da zona inicial? (+5)</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="autoScoreHub" data-points="5">
+                            <span>Pontua no HUB? (+5)</span>
+                        </label>
+                    </div>
+
+                    <div id="autoScoreDetails" class="sub-section" style="display: none;">
+                        <div class="form-group">
+                            <label>Quantidade média de FUEL pontuados:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="autoFuelAmount" value="4">
+                                    <span>1-2 (+4)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="autoFuelAmount" value="7">
+                                    <span>3-5 (+7)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="autoFuelAmount" value="10">
+                                    <span>6+ (+10)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo de pontuação:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="autoAccuracy" value="2">
+                                    <span>Baixa precisão (+2)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="autoAccuracy" value="5">
+                                    <span>Média (+5)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="autoAccuracy" value="7">
+                                    <span>Alta (+7)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="autoClimb" data-points="10">
+                            <span>Consegue CLIMB no autônomo? (+10)</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contribui para Ranking Point?</label>
+                        <div class="checkbox-group-inline">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="autoRPAuto" data-points="6">
+                                <span>RP de Autônomo (+6)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="autoRPScore" data-points="6">
+                                <span>RP de Pontuação (+6)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teleoperated Section -->
+                <div class="form-section">
+                    <h3 class="form-section-title">🎮 TELEOPERADO</h3>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="teleopDefensive">
+                            <span>Robô focado em defesa?</span>
+                        </label>
+                    </div>
+
+                    <div id="defensiveDetails" class="sub-section" style="display: none;">
+                        <div class="form-group">
+                            <label>Tipo de defesa:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="defenseType" value="8">
+                                    <span>Bloqueio de ciclo (+8)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="defenseType" value="5">
+                                    <span>Empurrão (+5)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="defenseType" value="4">
+                                    <span>Zoneamento (+4)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Eficiência defensiva:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="defenseEfficiency" value="3">
+                                    <span>Baixa (+3)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="defenseEfficiency" value="7">
+                                    <span>Média (+7)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="defenseEfficiency" value="8">
+                                    <span>Alta (+8)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="offensiveDetails" class="sub-section">
+                        <div class="form-group">
+                            <label>Capacidade de FUEL:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="fuelCapacity" value="4">
+                                    <span>Baixa (+4)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="fuelCapacity" value="8">
+                                    <span>Média (+8)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="fuelCapacity" value="12">
+                                    <span>Alta (+12)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ciclo médio de pontuação:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="scoreCycle" value="4">
+                                    <span>Lento (+4)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="scoreCycle" value="8">
+                                    <span>Médio (+8)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="scoreCycle" value="14">
+                                    <span>Rápido (+14)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Eficiência de pontuação:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="scoreEfficiency" value="4">
+                                    <span>1-2 (+4)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="scoreEfficiency" value="8">
+                                    <span>3-5 (+8)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="scoreEfficiency" value="14">
+                                    <span>6+ (+14)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Posicionamento preferido:</label>
+                            <div class="checkbox-group-inline">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="posHub">
+                                    <span>Próximo ao HUB</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="posLong">
+                                    <span>Lado do campo / ciclo longo</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="posBoth" data-points="5">
+                                    <span>Ambos (+5)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="scoreInactive" data-points="6">
+                                <span>Pontua com HUB inativo? (+6)</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Por onde se movimenta?</label>
+                            <div class="checkbox-group-inline">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="moveRamp" data-points="3">
+                                    <span>Rampa (+3)</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="moveSides" data-points="3">
+                                    <span>Laterais (+3)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Endgame Section -->
+                <div class="form-section">
+                    <h3 class="form-section-title">🏁 ENDGAME</h3>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="endClimb">
+                            <span>Conseguiu CLIMB?</span>
+                        </label>
+                    </div>
+
+                    <div id="climbDetails" class="sub-section" style="display: none;">
+                        <div class="form-group">
+                            <label>Nível do CLIMB:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="climbLevel" value="10">
+                                    <span>Low rung (+10)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="climbLevel" value="16">
+                                    <span>Mid rung (+16)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="climbLevel" value="22">
+                                    <span>High rung (+22)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tempo para subir:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="climbTime" value="6">
+                                    <span>Rápido (+6)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="climbTime" value="4">
+                                    <span>Médio (+4)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="climbTime" value="2">
+                                    <span>Lento (+2)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="endRP" data-points="10">
+                                <span>Garante RP de Endgame? (+10)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Considerations Section -->
+                <div class="form-section">
+                    <h3 class="form-section-title">⚠️ CONSIDERAÇÕES</h3>
+                    
+                    <div class="form-group">
+                        <label>Penalidades frequentes?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="penalties" value="0">
+                                <span>Nunca (0)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="penalties" value="-3">
+                                <span>Raramente (-3)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="penalties" value="-7">
+                                <span>Às vezes (-7)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="penalties" value="-15">
+                                <span>Frequente (-15)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="penaltyDetails" class="sub-section" style="display: none;">
+                        <div class="form-group">
+                            <label>Tipo mais comum:</label>
+                            <select id="penaltyType">
+                                <option value="">Selecione...</option>
+                                <option value="illegal_defense">Defesa ilegal</option>
+                                <option value="restricted_area">Contato em área restrita</option>
+                                <option value="climb_interference">Interferência de climb</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Funciona bem com outros robôs?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="teamwork" value="8">
+                                <span>Sim (+8)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="teamwork" value="3">
+                                <span>Parcialmente (+3)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="teamwork" value="-8">
+                                <span>Não (-8)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações sobre trabalho em equipe:</label>
+                        <div class="checkbox-group-inline">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="obsSpace">
+                                <span>Divide espaço bem</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="obsCycles">
+                                <span>Não atrapalha ciclos</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="obsEndgame">
+                                <span>Coordena endgame</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="obsConflict">
+                                <span>Costuma causar conflito</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Consistência geral:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="consistency" value="-10">
+                                <span>Instável (-10)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="consistency" value="5">
+                                <span>Média (+5)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="consistency" value="10">
+                                <span>Alta (+10)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confiabilidade mecânica:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="reliability" value="-15">
+                                <span>Quebra/falha frequente (-15)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reliability" value="-3">
+                                <span>Algumas falhas (-3)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reliability" value="10">
+                                <span>Muito confiável (+10)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comentários do scouter:</label>
+                        <textarea id="comments" rows="5" placeholder="Observações adicionais sobre o desempenho da equipe..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Score Display -->
+                <div class="score-display">
+                    <div class="score-label">PONTUAÇÃO TOTAL</div>
+                    <div class="score-value" id="totalScore">0</div>
+                    <div class="score-subtitle">pontos</div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                        <span>🔄 LIMPAR</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <span>💾 SALVAR NO FIREBASE</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Team Detail Modal -->
+    <div id="teamModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
 
     <script type="module" src="./script.js"></script>
+    <script type="module" src="./js/scout-firebase.js"></script>
 </body>
 
 </html>
