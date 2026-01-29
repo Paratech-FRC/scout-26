@@ -290,22 +290,6 @@
     transition: var(--transition-medium);
 }
 
-.team-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent, var(--color-neon-cyan), transparent 30%);
-    animation: cardRotate 6s linear infinite;
-    opacity: 0;
-    transition: var(--transition-medium);
-}
-
-.team-card:hover::before {
-    opacity: 0.3;
-}
 
 @keyframes cardRotate {
     0% { transform: rotate(0deg); }
