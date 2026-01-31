@@ -66,33 +66,6 @@ export function getTeamReportsFromFirebase(teamNumber, callback) {
     });
 }
 
-// Migrate local storage data to Firebase (one-time operation)
-export function migrateLocalStorageToFirebase() {
-    const localReports = localStorage.getItem('scoutReports');
-    if (!localReports) {
-        console.log('ℹ️ Nenhum dado local para migrar');
-        return Promise.resolve();
-    }
-    
-    const reports = JSON.parse(localReports);
-    console.log(`🔄 Migrando ${reports.length} relatórios do localStorage para Firebase...`);
-    
-    const promises = reports.map(report => {
-        // Check if report already has a firebaseId
-        if (report.firebaseId) {
-            return Promise.resolve();
-        }
-        return saveReportToFirebase(report);
-    });
-    
-    return Promise.all(promises).then(() => {
-        console.log('✅ Migração concluída com sucesso!');
-        // Keep local storage as backup
-    }).catch((error) => {
-        console.error('❌ Erro durante migração:', error);
-    });
-}
-
 // Get all teams with their reports
 export function getAllTeamsFromFirebase(callback) {
     onValue(reportsRef, (snapshot) => {
